@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const animatedElements = document.querySelectorAll('.animate-in, .glass-card');
     animatedElements.forEach(el => {
-        el.classList.add('animate-in'); // Ensure class is present
+        el.classList.add('animate-in');
         observer.observe(el);
     });
 
@@ -23,19 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
             const dateInput = document.getElementById('date');
-            const selectedDate = new Date(dateInput.value);
-            const today = new Date();
-            today.setHours(0,0,0,0);
+            if (dateInput) {
+                const selectedDate = new Date(dateInput.value);
+                const today = new Date();
+                today.setHours(0,0,0,0);
 
-            if (selectedDate < today) {
-                e.preventDefault();
-                alert("ERROR: SELECTED DATE IS IN THE PAST. PLEASE RESET PARAMETERS.");
-                dateInput.style.borderColor = "var(--neon-pink)";
+                if (selectedDate < today) {
+                    e.preventDefault();
+                    alert("ERROR: SELECTED DATE IS IN THE PAST. PLEASE RESET PARAMETERS.");
+                    dateInput.style.borderColor = "var(--neon-pink)";
+                }
             }
         });
     }
 
-    // Hover sound effect placeholder (Visual only for now)
+    // Interactive Button Effects
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach(btn => {
         btn.addEventListener('mouseenter', () => {
